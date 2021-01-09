@@ -1,12 +1,39 @@
 import axios from 'axios';
+
+
+//window.location.href.split(":")[0]+"://" + window.location.host.split(":")[0]+":8082/"
+//window.location.port===""?window.location.protocol==="http:"?80:443:window.location.port
+
+//const applicationBaseUrl = window.location.href.split(":")[0]+"://" + window.location.host.split(":")[0]
+//const port = window.location.port === "" ? window.location.protocol === "http:"?80:443:window.location.port
+/*const applicationFrontend = applicationBaseUrl + ":" + window.location.port === "" ? window.location.protocol === "http:"?80:443:window.location.port
+const applicationBackend = applicationBaseUrl + ":" + 8082
+const applicationSSO = applicationBaseUrl + ":" + 8083
+
+
+
+console.log("Frontend",applicationBaseUrl + ":" + port)
+console.log("Backend",applicationBaseUrl + ":" + 8082)
+console.log("SSO",applicationBaseUrl + ":" + 8083)*/
+
+let applicationBaseUrl = window.location.href.split(":")[0]+"://" + window.location.host.split(":")[0]
+let port = window.location.port === "" ? window.location.protocol === "http:"?80:443:window.location.port
 const _service={
-    clientId: "qualitool_backend",
-    authEndpoint: "https://localhost:8083/auth/realms/qualitool/protocol/openid-connect/auth",
-    redirectUri: "https://localhost:3000",
-    tokenEndpoint: "https://localhost:8083/auth/realms/qualitool/protocol/openid-connect/token",
-    secret: "a889f55d-5f3e-42a2-90e0-5200ff58751b",
-    loggedIn: false
+  frontendUrl: applicationBaseUrl + ":" + port,
+  backendUrl: applicationBaseUrl + ":" + 8082,
+  ssoUrl: applicationBaseUrl + ":" + 8083,
+
+
+
+  clientId: "qualitool_backend",
+  authEndpoint: applicationBaseUrl + ":" + 8083 + "/auth/realms/qualitool/protocol/openid-connect/auth",
+  redirectUri: "https://localhost:3000",
+  tokenEndpoint: applicationBaseUrl + ":" + 8083 + "/auth/realms/qualitool/protocol/openid-connect/token",
+  secret: "a889f55d-5f3e-42a2-90e0-5200ff58751b",
+  loggedIn: false
 }
+
+console.log(_service)
 
 var credHolder = (function(){
     var savedtoken = null
@@ -40,7 +67,7 @@ var credHolder = (function(){
       'Authorization': 'Bearer '+ savedtoken.access_token,
       }
   
-      axios.get("https://localhost:8082"+resourceUrl
+      axios.get(_service.backendUrl + resourceUrl
       ,{headers:headers})
       .then((response)=>{
           callback(response.data)
