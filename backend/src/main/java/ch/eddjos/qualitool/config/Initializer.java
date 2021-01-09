@@ -181,4 +181,7 @@ public class Initializer implements ApplicationListener<ApplicationReadyEvent> {
         return checkboxRepository.save(cb);
     }
 
+
+
+
 }

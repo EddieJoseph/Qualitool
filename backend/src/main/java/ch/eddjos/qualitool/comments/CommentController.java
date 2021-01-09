@@ -1,7 +1,6 @@
 package ch.eddjos.qualitool.comments;
 
 
-import ch.eddjos.qualitool.jwt.JwtTokenUtil;
 import ch.eddjos.qualitool.person.Person;
 import ch.eddjos.qualitool.person.PersonService;
 import ch.eddjos.qualitool.updatecache.UpdateCache;
@@ -28,8 +27,8 @@ public class CommentController {
     private CommentService service;
     @Autowired
     private CommentDTOFactory dtoFactory;
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    /*@Autowired
+    private JwtTokenUtil jwtTokenUtil;*/
     @Autowired
     private PersonService personService;
 
@@ -46,7 +45,7 @@ public class CommentController {
     @Transactional
     @PostMapping("/{version}")
     public ResponseEntity<Versionized<CommentDTO>> save(@RequestBody CommentDTO dto, @PathVariable("version") int versionNr){
-        dto.authorId=jwtTokenUtil.getUser().getId();
+        dto.authorId=0;//jwtTokenUtil.getUser().getId();
         System.out.println(dto);
         Comment comment=dtoFactory.unwrap(dto);
         CommentDTO createdDTO = dtoFactory.create(service.insert(comment));

@@ -2,7 +2,7 @@ spring:
   application:
     name: Qualitoolbackend
   datasource:
-    url: jdbc:postgresql://qualitool_db:5432/${POSTGRES_DB}?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:postgresql://qualitool_db:5432/${BACKEND_DB}?useUnicode=true&characterEncoding=utf-8
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     sql-script-encoding: UTF-8

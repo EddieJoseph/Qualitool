@@ -1,6 +1,6 @@
 package ch.eddjos.qualitool.auth;
 
-import ch.eddjos.qualitool.jwt.JwtTokenUtil;
+//import ch.eddjos.qualitool.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +14,20 @@ import java.util.List;
 public class BenutzerController {
     private BenutzerDTOFactory benutzerDTOFactory;
     private BenutzerRepository benutzerRepository;
-    private JwtTokenUtil jwtTokenUtil;
+//    private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     private BenutzerService benutzerService;
 
-    public BenutzerController(BenutzerRepository benutzerRepository, JwtTokenUtil jwtTokenUtil,BenutzerDTOFactory benutzerDTOFactory) {
+    public BenutzerController(BenutzerRepository benutzerRepository, /*JwtTokenUtil jwtTokenUtil,*/BenutzerDTOFactory benutzerDTOFactory) {
         this.benutzerRepository = benutzerRepository;
-        this.jwtTokenUtil = jwtTokenUtil;
+        /*this.jwtTokenUtil = jwtTokenUtil;*/
         this.benutzerDTOFactory = benutzerDTOFactory;
     }
 
     @GetMapping("")
     public BenutzerDTO getUserData(){
-        return benutzerDTOFactory.ctrate(jwtTokenUtil.getUser());
+        return null;//benutzerDTOFactory.ctrate(jwtTokenUtil.getUser());
     }
 
     @GetMapping("/getall")

@@ -9,6 +9,20 @@ services:
       - qualitool.env
     volumes:
       - database-data:/var/lib/postgresql/data
+      - ./dbinit:/docker-entrypoint-initdb.d
+  sso:
+    image: "quay.io/keycloak/keycloak"
+    container_name: sso
+    ports:
+      - 8083:8443
+    env_file:
+      - qualitool.env
+    depends_on:
+      - database
+    volumes:
+      - ./cert:/etc/x509/https
+
+    
   backend:
     image: "gcr.io/qualitool/qualitool_be"
     container_name: qualitool_be
@@ -17,9 +31,11 @@ services:
     env_file:
       - qualitool.env
     volumes:
-     - ./cert:/cert
-     - ./static:/static
-     - ./init:/init
+      - ./cert:/cert
+      - ./static:/static
+      - ./init:/init
+    depends_on:
+      - database
       
   frontend:
     image: "gcr.io/qualitool/qualitool_fe"

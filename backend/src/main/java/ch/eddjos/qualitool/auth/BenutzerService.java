@@ -21,12 +21,12 @@ public class BenutzerService implements UserDetailsService {
 
     private final BenutzerRepository benutzerRepository;
 
-    private final PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Inject
-    public BenutzerService(BenutzerRepository benutzerRepository, PasswordEncoder passwordEncoder) {
+    public BenutzerService(BenutzerRepository benutzerRepository/*, PasswordEncoder passwordEncoder*/) {
         this.benutzerRepository = benutzerRepository;
-        this.passwordEncoder = passwordEncoder;
+        /*this.passwordEncoder = passwordEncoder;*/
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
