@@ -18,4 +18,11 @@ COPY keystore.properties keystore.properties
 ENV LANG en_GB.UTF-8
 RUN apk add --update ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family && rm -rf /var/cache/apk/*
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+RUN echo '#!/bin/sh' >> /entrypoint.sh
+RUN echo 'keytool -import -alias localhost -file /cert/fullchain.pem -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -noprompt' >> /entrypoint.sh
+RUN echo 'java -jar /app.jar' >> /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
+#ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["/entrypoint.sh"]

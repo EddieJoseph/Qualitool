@@ -1,0 +1,2 @@
+CREATE DATABASE qualitool;
+CREATE DATABASE sso;

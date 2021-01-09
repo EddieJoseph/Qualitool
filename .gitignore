@@ -8,3 +8,4 @@ personaldata.sql
 static/*
 init/Block.qbd
 init/RQF.cbd
+installcert.ps1
