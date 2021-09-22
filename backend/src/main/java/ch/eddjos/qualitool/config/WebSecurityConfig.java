@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
-                .requiresChannel().anyRequest().requiresSecure().and()
+//                .requiresChannel().anyRequest().requiresSecure().and()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
